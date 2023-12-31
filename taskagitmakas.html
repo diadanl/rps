@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors Game</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+    #score {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+    #output {
+      margin-top: 30px;
+      font-size: 28.8px;
+      color: #333;
+    }
+    #options {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: none;
+    }
+    img {
+      width: 110.4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="score">Wins: <span id="winCount">0</span> | Losses: <span id="loseCount">0</span></div>
+  <h1>Rock, Paper, Scissors Game</h1>
+  <div id="output"></div>
+  <div id="options">
+    <button onclick="playGame('rock')">
+      <img src="rock.png" alt="Rock">
+    </button>
+    <button onclick="playGame('paper')">
+      <img src="paper.png" alt="Paper">
+    </button>
+    <button onclick="playGame('scissors')">
+      <img src="scissors.png" alt="Scissors">
+    </button>
+  </div>
+
+  <audio id="winSound" src="win.mp3"></audio>
+  <audio id="loseSound" src="lose.mp3"></audio>
+  <audio id="tieSound" src="tie.mp3"></audio>
+
+  <script>
+    let winCount = 0;
+    let loseCount = 0;
+
+    function playGame(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      document.getElementById('output').innerHTML = `You chose ${userChoice}.<br>Computer chose ${computerChoice}.<br>`;
+
+      if (userChoice === computerChoice) {
+        document.getElementById('output').innerHTML += '<span style="color: red; font-weight: bold; font-size: 33.12px;">It\'s a tie!</span>';
+        playTieSound();
+      } else if (
+        (userChoice === 'rock' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'rock') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        document.getElementById('output').innerHTML += '<span style="color: navy; font-weight: bold; font-size: 33.12px;">You win!</span>';
+        playWinSound();
+        updateScore('win');
+      } else {
+        document.getElementById('output').innerHTML += '<span style="color: black; font-weight: bold; font-size: 33.12px;">You lose!</span>';
+        playLoseSound();
+        updateScore('lose');
+      }
+    }
+
+    function playWinSound() {
+      const winSound = document.getElementById('winSound');
+      winSound.currentTime = 0; // Reset audio to the beginning
+      winSound.play();
+    }
+
+    function playLoseSound() {
+      const loseSound = document.getElementById('loseSound');
+      loseSound.currentTime = 0; // Reset audio to the beginning
+      loseSound.play();
+    }
+
+    function playTieSound() {
+      const tieSound = document.getElementById('tieSound');
+      tieSound.currentTime = 0; // Reset audio to the beginning
+      tieSound.play();
+    }
+
+    function updateScore(outcome) {
+      if (outcome === 'win') {
+        winCount++;
+      } else if (outcome === 'lose') {
+        loseCount++;
+      }
+
+      document.getElementById('winCount').innerText = winCount;
+      document.getElementById('loseCount').innerText = loseCount;
+    }
+  </script>
+
+</body>
+</html>
