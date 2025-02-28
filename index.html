@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <title>Rock, Paper, Scissors Game</title>
   <style>
     body {
@@ -17,6 +18,12 @@
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       color: #fff;
     }
+    /* Dashed border */
+hr.dashed {
+  border-top: 3px dashed #bbb;
+}  footer {
+    margin-top: 60px !important; /* Adjust as needed */
+  }
     #score {
       position: absolute;
       top: 10px;
@@ -148,6 +155,18 @@
       document.getElementById('loseCount').innerText = loseCount;
     }
   </script>
-
+<footer>
+  <p>
+    <a href="https://github.com/diadanl" target="_blank" title="GitHub">
+      <i class="bi bi-github fs-4"></i>
+    </a>
+    <a href="https://www.tortoisebyte.net" target="_blank" title="Website">
+      <i class="bi bi-person-circle fs-4"></i>
+    </a>
+  </p>
+</footer>
 </body>
+
+
+
 </html>

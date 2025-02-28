@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <title>Rock, Paper, Scissors Game</title>
   <style>
     body {
@@ -14,46 +15,73 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background-color: #f0f0f0;
-      position: relative;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #fff;
     }
+    /* Dashed border */
+hr.dashed {
+  border-top: 3px dashed #bbb;
+}  footer {
+    margin-top: 60px !important; /* Adjust as needed */
+  }
     #score {
       position: absolute;
       top: 10px;
       right: 10px;
       font-size: 18px;
-      color: #333;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 10px;
+    }
+    h1 {
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
     #output {
-      margin-top: 30px;
-      font-size: 28.8px;
-      color: #333;
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 10px;
     }
     #options {
       margin-top: 20px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
+      flex-wrap: wrap;
     }
     button {
       border: none;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      background: none;
+      background: #fff;
+      padding: 15px;
+      border-radius: 50%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     }
     img {
-      width: 110.4px;
+      width: 80px;
+    }
+    @media (max-width: 600px) {
+      img {
+        width: 60px;
+      }
+      #score {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
   <div id="score">Wins: <span id="winCount">0</span> | Losses: <span id="loseCount">0</span></div>
-  <h1>Rock, Paper, Scissors Game</h1>
-  <div id="output"></div>
+  <h1>Rock, Paper, Scissors</h1>
+  <div id="output">Make your choice!</div>
   <div id="options">
     <button onclick="playGame('rock')">
       <img src="rock.png" alt="Rock">
@@ -78,41 +106,42 @@
       const choices = ['rock', 'paper', 'scissors'];
       const computerChoice = choices[Math.floor(Math.random() * 3)];
 
-      document.getElementById('output').innerHTML = `You chose ${userChoice}.<br>Computer chose ${computerChoice}.<br>`;
-
+      let resultMessage = `You chose ${userChoice}.<br>Computer chose ${computerChoice}.<br>`;
+      
       if (userChoice === computerChoice) {
-        document.getElementById('output').innerHTML += '<span style="color: red; font-weight: bold; font-size: 33.12px;">It\'s a tie!</span>';
+        resultMessage += '<span style="color: yellow;">It\'s a tie!</span>';
         playTieSound();
       } else if (
         (userChoice === 'rock' && computerChoice === 'scissors') ||
         (userChoice === 'paper' && computerChoice === 'rock') ||
         (userChoice === 'scissors' && computerChoice === 'paper')
       ) {
-        document.getElementById('output').innerHTML += '<span style="color: navy; font-weight: bold; font-size: 33.12px;">You win!</span>';
+        resultMessage += '<span style="color: lightgreen;">You win!</span>';
         playWinSound();
         updateScore('win');
       } else {
-        document.getElementById('output').innerHTML += '<span style="color: black; font-weight: bold; font-size: 33.12px;">You lose!</span>';
+        resultMessage += '<span style="color: red;">You lose!</span>';
         playLoseSound();
         updateScore('lose');
       }
+      document.getElementById('output').innerHTML = resultMessage;
     }
 
     function playWinSound() {
       const winSound = document.getElementById('winSound');
-      winSound.currentTime = 0; // Reset audio to the beginning
+      winSound.currentTime = 0;
       winSound.play();
     }
 
     function playLoseSound() {
       const loseSound = document.getElementById('loseSound');
-      loseSound.currentTime = 0; // Reset audio to the beginning
+      loseSound.currentTime = 0;
       loseSound.play();
     }
 
     function playTieSound() {
       const tieSound = document.getElementById('tieSound');
-      tieSound.currentTime = 0; // Reset audio to the beginning
+      tieSound.currentTime = 0;
       tieSound.play();
     }
 
@@ -122,11 +151,22 @@
       } else if (outcome === 'lose') {
         loseCount++;
       }
-
       document.getElementById('winCount').innerText = winCount;
       document.getElementById('loseCount').innerText = loseCount;
     }
   </script>
-
+<footer>
+  <p>
+    <a href="https://github.com/diadanl" target="_blank" rel="noopener noreferrer" title="GitHub">
+      <i class="bi bi-github fs-4"></i>
+    </a>
+    <a href="https://www.tortoisebyte.net" target="_blank" rel="noopener noreferrer" title="Website">
+      <i class="bi bi-person-circle fs-4"></i>
+    </a>
+  </p>
+</footer>
 </body>
+
+
+
 </html>
